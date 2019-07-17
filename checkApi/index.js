@@ -10,6 +10,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+app.use(function (req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Methods", "*");
+    next();
+});
 
 // http attractions //
 
@@ -35,6 +41,23 @@ app.put('/attractions/:id', (req, res) => {
                     res.status(500).send();
                 } else {
                     res.status(200).json(results);
+                }
+            })
+        }
+    });
+});
+
+app.post('/attractions', (req, res) => {
+    const formData = req.body;
+    connection.query('INSERT INTO attractions SET ?', formData, (err, results)=> {
+        if(err) {
+            res.status(500).send('Erreur lors de la sauvegarde');
+        } else {
+            connection.query('SELECT * FROM attractions WHERE id = ?', results.insertId, (err, results) => {
+                if(err) {
+                    res.status(500).send('Erreur lors de la récupération');
+                } else {
+                    res.status(201).json(results);
                 }
             })
         }
