@@ -18,7 +18,7 @@ app.get('/attractions', (req, res) => {
         if(err) {
             res.status(500).send('Erreur lors de la récupération des attractions');
         } else {
-            res.json(results)
+            res.status(200).json(results);
         }
     });
 });
@@ -30,7 +30,13 @@ app.put('/attractions/:id', (req, res) => {
         if(err) {
             res.status(500).send('Erreur lors de la modification');
         } else {
-            res.sendStatus(200);
+            connection.query('SELECT * FROM attractions WHERE id = ?', id, (err, results) => {
+                if(err) {
+                    res.status(500).send();
+                } else {
+                    res.status(200).json(results);
+                }
+            })
         }
     });
 });
@@ -43,7 +49,7 @@ app.get('/spectacles', (req, res) => {
         if(err) {
             res.status(500).send('Erreur lors de la récupération des spectacles');
         } else {
-            res.json(results)
+            res.status(200).json(results)
         }
     });
 });
@@ -54,18 +60,24 @@ app.get('/spectacles/:id', (req, res) => {
         if(err) {
             res.status(500).send('Erreur lors de la récupération du spectacle');
         } else {
-            res.json(results)
+            res.status(200).json(results)
         }
     });
 });
 
 app.post('/spectacles', (req, res) => {
     const formData = req.body;
-    connection.query('INSERT INTO spectacles SET ?', formData, (err, results) => {
+    connection.query('INSERT INTO spectacles SET ?', formData, (err, results)=> {
         if(err) {
             res.status(500).send('Erreur lors de la sauvegarde du spectacle');
         } else {
-            res.json(results)
+            connection.query('SELECT * FROM spectacles WHERE id = ?', results.insertId, (err, results) => {
+                if(err) {
+                    res.status(500).send('Erreur lors de la récupération du spectacle');
+                } else {
+                    res.status(201).json(results);
+                }
+            })
         }
     });
 });
