@@ -1,0 +1,16 @@
+.flex-container {
+  border: solid 3px #6D1302;
+  background-color: #E39725;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem;
+}
+input {
+  margin: 1rem;
+}
+button {
+  width: 8rem;
+  background-color: #6D1302;
+  color: white;
+}
