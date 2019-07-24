@@ -1,4 +1,5 @@
-<nav class="navbar navbar-expand-lg">
+<div *ngIf="loginService.isLogin()">
+  <nav class="navbar navbar-expand-lg">
     <a class="navbar-brand">Notre concept</a>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
@@ -10,5 +11,6 @@
         </li>
       </ul>
     </div>
+      <a class="log" (click)="logout()">Se déconnecter</a>
   </nav>
-
+</div>

@@ -23,4 +23,16 @@ export class LoginService {
             }
           }));
       }
+
+    isLogin() {
+      if (localStorage.getItem('token')) {
+        return true;
+      }
+      return false;
+    }
+
+    isLogout() {
+      localStorage.removeItem('token');
+      this.user = false;
+    }
 }
