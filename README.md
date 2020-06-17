@@ -1,5 +1,11 @@
 # Checkpoint
 
+## Description
+
+This is an exercice in order to validate a checkpoint. 
+
+![Project cover](img/exercice-img.png)
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.1.1.
 
 ## Development server
