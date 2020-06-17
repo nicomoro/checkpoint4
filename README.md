@@ -2,7 +2,7 @@
 
 ## Description
 
-This is an exercice in order to validate a checkpoint. 
+This is an exercice in order to validate a checkpoint. The project must be a landing page about circus theme!
 
 ![Project cover](img/exercice-img.png)
 
